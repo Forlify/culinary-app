@@ -1,12 +1,17 @@
 from django.db import models
-
-# Create your models here.
+from django.utils.translation import gettext_lazy as _
 
 
 class Recipe(models.Model):
-    difficulty = models.IntegerField(default=1) #enum jako foreign key
+    class Difficulty(models.IntegerChoices):
+        VERY_EASY = 1
+        EASY = 2
+        MEDIUM = 3
+        HARD = 4
+        VERY_HARD = 5
+    difficulty = models.IntegerField(choices = Difficulty.choices, default = Difficulty.MEDIUM)
     name = models.CharField(max_length=100)
-    image = models.CharField(max_length=200) #link do obrazka # jest image field albo file field
+    image = models.CharField(max_length=200) #link do obrazka
 
     def __str__(self):
         return self.name
@@ -28,9 +33,20 @@ class Ingredient(models.Model):
 
 
 class IngredientInstance(models.Model):
+    class Measurement(models.TextChoices):
+        PIECE = 'PSC'
+        CUP = 'C'
+        ML = 'ML'
+        L = 'L'
+        G = 'G'
+        KG = 'KG'
+        SPOON = 'SP'
+        TEASPOON = 'TSP'
+        PINCH = 'P'
+        CLOVE = 'CLV'
     ingredient = models.ForeignKey(Ingredient, on_delete=models.DO_NOTHING)
     how_much = models.FloatField(default=0)
-    how_much_of_what = models.CharField(max_length=10, default="") # w zaleznosci od ingredient, wpisane w ingredient albo jako osobny model, jako enum?
+    how_much_of_what = models.CharField(choices = Measurement.choices, max_length = 5)
     recipe = models.ManyToManyField(Recipe)
 
     def __str__(self):
