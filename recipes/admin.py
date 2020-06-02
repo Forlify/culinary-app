@@ -6,10 +6,10 @@ from .models import Recipe
 from .models import Ingredient
 from .models import Category
 from .models import IngredientInstance
-from .models import Steps
+from .models import Step
 
 admin.site.register(Recipe)
 admin.site.register(Ingredient)
 admin.site.register(Category)
 admin.site.register(IngredientInstance)
-admin.site.register(Steps)
+admin.site.register(Step)
