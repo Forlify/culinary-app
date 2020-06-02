@@ -15,7 +15,7 @@ Technologie:
 
 ### Schemat bazy:
 
-![schemat_bazy](schemat.png)
+![schemat_bazy](diagram.png)
 
 ### Przewodnik po kodzie:
 
