@@ -15,11 +15,13 @@ Technologie:
 
 ### Schemat bazy:
 
-![schemat_bazy](diagram.png)
+![schemat_bazy](diagram_datagrip.png)
 
 ### Przewodnik po kodzie:
 
  - **`manage.py`** - Główny plik django, serce aplikacji
+
+ - **`sql_code.sql`** - Wygenerowany kod SQL modeli aplikacji
  
  - **Folder `recipe`** - Pliki generowane przez django
     - `settings.py` - Podstawowe ustawienia aplikacji np. adres do bazy danych
@@ -39,3 +41,8 @@ Technologie:
     - Folder `migrations` - Folder z migracjami
     - Folder `static` - Style stron + grafiki
     - Folder `templates` - Templatki stron w html
+
+### Decyzje projektowe:
+ - W początkowej wersji aplikacji nie zakładaliśmy, że przepisy będą miały swój kraj pochodzenia. Znaleźliśmy pakiet Pythona który idealnie nadawałby się do tego, i z tego powodu zdecydowaliśmy się zahardkodować część państw tak aby dało się przyporządkować przepisy do konkretnych krajów. W przypadku braku państwa na liście możemy wybrać opcje "inny". Dlatego też państwa nie mają osobnej tabeli a np. kategorie mają.
+ - W większości metod korzystaliśmy z djangowego podejścia do budowy aplikacji, przy wyszukiwarce natchnęliśmy sie jednak na ograniczenia dostępnych metod i postanowiliśmy zbudować zapytanie SQL'owe odpowiadające naszym wymaganiom.
+ - Ze względu na to, że PostgresSQL posiada ENUM'y postanowiliśmy z nich skorzystać. Wygodnie było z nich skorzystać w dwóch wypadkach: "Measurement" oraz "Difficulty" 
